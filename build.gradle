@@ -6,9 +6,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -20,4 +17,26 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    supportLibraryVersion = '25.2.0'
+
+    espressoVersion = '2.2.2'
+
+    guavaVersion = '21.0'
+    gsonVersion = '2.8.0'
+
+    rxAndroidVersion = '1.2.1'
+    rxJavaVersion = '1.1.8'
+
+    retrofitVersion = '2.2.0'
+
+    daggerVersion = '2.9'
+
+    butterKnifeVersion = '8.5.1'
+
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    hamcrestVersion = '1.3'
 }
