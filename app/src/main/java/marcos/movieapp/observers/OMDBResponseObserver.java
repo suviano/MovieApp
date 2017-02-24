@@ -1,9 +1,10 @@
 package marcos.movieapp.observers;
 
-import marcos.movieapp.models.ShortMovie;
+import marcos.movieapp.models.OMDBapi.MovieOnList;
+import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import rx.Observer;
 
-public abstract class ShortMovieObserver implements Observer<ShortMovie> {
+public abstract class OMDBResponseObserver implements Observer<OMDBResponse> {
 
     public void onCompleted() {
 
@@ -17,5 +18,6 @@ public abstract class ShortMovieObserver implements Observer<ShortMovie> {
     }
 
     // I want handle logic here but i don't know how! `me sad`
-    public abstract void onNext(ShortMovie shortMovie);
+    // default java 8 do not work with dagger :(
+    public abstract void onNext(OMDBResponse response);
 }

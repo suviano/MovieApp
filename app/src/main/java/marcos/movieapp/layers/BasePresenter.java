@@ -1,4 +1,4 @@
-package marcos.movieapp;
+package marcos.movieapp.layers;
 
 public interface BasePresenter {
     void loadData();

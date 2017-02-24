@@ -3,7 +3,7 @@ package marcos.movieapp.models.OMDBapi;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Search {
+public class MovieOnList {
 
     @SerializedName("Title")
     @Expose

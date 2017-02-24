@@ -1,11 +1,12 @@
 package marcos.movieapp.searchMovie;
 
-import marcos.movieapp.BaseModel;
-import marcos.movieapp.BasePresenter;
-import marcos.movieapp.BaseView;
-import marcos.movieapp.observers.ShortMovieObserver;
 import marcos.movieapp.helpers.RxHelper;
-import marcos.movieapp.models.ShortMovie;
+import marcos.movieapp.layers.BaseModel;
+import marcos.movieapp.layers.BasePresenter;
+import marcos.movieapp.layers.BaseView;
+import marcos.movieapp.models.OMDBapi.MovieOnList;
+import marcos.movieapp.models.OMDBapi.OMDBResponse;
+import marcos.movieapp.observers.OMDBResponseObserver;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -22,14 +23,14 @@ public class SearchMoviePresenter implements BasePresenter {
     @Override
     public void loadData() {
         this.rxSubscription = baseModel.result()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ShortMovieObserver() {
-                    @Override
-                    public void onNext(ShortMovie shortMovie) {
-                        baseView.updateData(shortMovie);
-                    }
-                });
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new OMDBResponseObserver() {
+                @Override
+                public void onNext(OMDBResponse response) {
+                    baseView.updateData(response);
+                }
+            });
     }
 
     @Override

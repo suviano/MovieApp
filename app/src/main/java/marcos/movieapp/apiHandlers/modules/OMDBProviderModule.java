@@ -2,7 +2,7 @@ package marcos.movieapp.apiHandlers.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import marcos.movieapp.apiHandlers.services.OMDBApi;
+import marcos.movieapp.apiHandlers.services.OMDBApiService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -10,7 +10,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class OMDBConnProvider {
+public class OMDBProviderModule {
 
     public final String ROOT_URL = "http://www.omdbapi.com";
 
@@ -34,8 +34,8 @@ public class OMDBConnProvider {
     }
 
     @Provides
-    public OMDBApi provideService() {
+    public OMDBApiService provideService() {
         return provideRetrofit(ROOT_URL, provideClient())
-                .create(OMDBApi.class);
+                .create(OMDBApiService.class);
     }
 }

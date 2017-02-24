@@ -4,13 +4,12 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import marcos.movieapp.BaseModel;
-import marcos.movieapp.BasePresenter;
-import marcos.movieapp.Repository;
-import marcos.movieapp.apiHandlers.modules.OMDBConnProvider;
-import marcos.movieapp.apiHandlers.services.OMDBApi;
+import marcos.movieapp.apiHandlers.modules.OMDBProviderModule;
+import marcos.movieapp.layers.BaseModel;
+import marcos.movieapp.layers.BasePresenter;
+import marcos.movieapp.apiHandlers.services.OMDBApiService;
 
-@Module(includes = {OMDBConnProvider.class})
+@Module(includes = {OMDBProviderModule.class})
 public class SearchMovieModule {
     @Provides
     public BasePresenter providePresenter(BaseModel baseModel) {
@@ -19,7 +18,7 @@ public class SearchMovieModule {
 
     @Provides
     @Singleton
-    public Repository provideRepo(OMDBApi apiService) {
+    public Repository provideRepo(OMDBApiService apiService) {
         return new SearchMovieRepository(apiService);
     }
 

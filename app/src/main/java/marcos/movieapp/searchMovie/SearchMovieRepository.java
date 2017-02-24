@@ -1,37 +1,51 @@
 package marcos.movieapp.searchMovie;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import marcos.movieapp.Repository;
-import marcos.movieapp.apiHandlers.services.OMDBApi;
+import marcos.movieapp.apiHandlers.services.OMDBApiService;
 import marcos.movieapp.models.OMDBapi.OMDBResponse;
-import marcos.movieapp.models.ShortMovie;
 import rx.Observable;
+import rx.functions.Func1;
 
-// TODO
 public class SearchMovieRepository implements Repository {
-    private OMDBApi omdbApi;
-    private List<ShortMovie> movieList;
+    private static final long STALE_MS = 20 * 1000;
+    private OMDBApiService omdbApiService;
+    private OMDBResponse moviesList;
+    private long timestamp;
 
-    public SearchMovieRepository(OMDBApi omdbApi) {
-        this.omdbApi = omdbApi;
-        this.movieList = new ArrayList<>();
+    public SearchMovieRepository(OMDBApiService omdbApiService) {
+        this.omdbApiService = omdbApiService;
     }
 
+    public boolean isUpToDate() {
+        return System.currentTimeMillis() - timestamp < STALE_MS;
+    }
+
+    // TODO
     @Override
     public Observable<OMDBResponse> getMoviesFromMemory() {
-        //return Observable.from(movieList);
-        return null;
+        if (isUpToDate()) {
+            //return omdbApiService.searchMovies("spider man");
+            return null;
+        } else {
+            timestamp = System.currentTimeMillis();
+            return Observable.empty();
+        }
     }
 
+    // TODO Get movies from response
     @Override
-    public Observable<OMDBResponse> getMoviesFromNetwork() {
-        return null;
+    public Observable<OMDBResponse> searchMoviesOfNetwork() {
+        Observable<OMDBResponse> omdbResponseObservable = omdbApiService.searchMovies("spider man");
+        return omdbResponseObservable.single(new Func1<OMDBResponse, Boolean>() {
+            @Override
+            public Boolean call(OMDBResponse response) {
+                moviesList = response;
+                return true;
+            }
+        });
     }
 
     @Override
     public Observable<OMDBResponse> getMoviesFromData() {
-        return null;
+        return getMoviesFromMemory().switchIfEmpty(searchMoviesOfNetwork());
     }
 }

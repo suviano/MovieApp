@@ -2,6 +2,9 @@ package marcos.movieapp.root;
 
 import android.app.Application;
 
+import marcos.movieapp.apiHandlers.modules.OMDBProviderModule;
+import marcos.movieapp.searchMovie.SearchMovieModule;
+
 public class App extends Application {
     private AppComponent component;
 
@@ -11,6 +14,8 @@ public class App extends Application {
 
         component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
+                .searchMovieModule(new SearchMovieModule())
+                .oMDBProviderModule(new OMDBProviderModule())
                 .build();
     }
 

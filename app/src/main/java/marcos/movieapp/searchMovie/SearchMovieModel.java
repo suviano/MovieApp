@@ -1,11 +1,9 @@
 package marcos.movieapp.searchMovie;
 
-import marcos.movieapp.BaseModel;
-import marcos.movieapp.Repository;
-import marcos.movieapp.models.ShortMovie;
+import marcos.movieapp.layers.BaseModel;
+import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import rx.Observable;
 
-// TODO
 public class SearchMovieModel implements BaseModel {
     private Repository repository;
 
@@ -13,8 +11,9 @@ public class SearchMovieModel implements BaseModel {
         this.repository = repository;
     }
 
+    // TODO return Observable list of Movie
     @Override
-    public Observable<ShortMovie> result() {
-        return null;
+    public Observable<OMDBResponse> result() {
+        return repository.getMoviesFromData();
     }
 }
