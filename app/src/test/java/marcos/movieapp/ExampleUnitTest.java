@@ -1,4 +1,4 @@
-package marcos.moviaapp;
+package marcos.movieapp;
 
 import org.junit.Test;
 

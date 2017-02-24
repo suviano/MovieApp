@@ -22,7 +22,6 @@ task clean(type: Delete) {
 ext {
     supportLibraryVersion = '25.2.0'
 
-    espressoVersion = '2.2.2'
 
     guavaVersion = '21.0'
     gsonVersion = '2.8.0'
@@ -31,6 +30,8 @@ ext {
     rxJavaVersion = '1.1.8'
 
     retrofitVersion = '2.2.0'
+
+    okHttpInterceptorVersion ='3.4.2'
 
     daggerVersion = '2.9'
 

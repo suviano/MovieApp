@@ -1,4 +1,4 @@
-package marcos.moviaapp.entities.omdb;
+package marcos.movieapp.models.OMDBapi;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

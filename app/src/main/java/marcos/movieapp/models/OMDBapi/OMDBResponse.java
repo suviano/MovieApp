@@ -1,11 +1,11 @@
-package marcos.moviaapp.entities.omdb;
+package marcos.movieapp.models.OMDBapi;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class OMBDbResponse {
+public class OMDBResponse {
 
     @SerializedName("Search")
     @Expose
