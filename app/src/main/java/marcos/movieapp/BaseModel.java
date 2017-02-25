@@ -1,4 +1,4 @@
-package marcos.movieapp.layers;
+package marcos.movieapp;
 
 import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import rx.Observable;

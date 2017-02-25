@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="marcos.movieapp.MainActivity">
+    tools:context="marcos.movieapp.searchMovie.SearchMovieActivity">
     <item
         android:id="@+id/movieOnList"
         android:actionViewClass="android.widget.SearchView"

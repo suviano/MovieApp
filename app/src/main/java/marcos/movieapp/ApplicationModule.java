@@ -1,4 +1,4 @@
-package marcos.movieapp.root;
+package marcos.movieapp;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,11 +9,11 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule {
+public class ApplicationModule {
 
     private Application mContext;
 
-    public AppModule(Application mContext) {
+    public ApplicationModule(Application mContext) {
         this.mContext = mContext;
     }
 

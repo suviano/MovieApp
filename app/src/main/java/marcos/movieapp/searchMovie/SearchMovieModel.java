@@ -1,6 +1,7 @@
 package marcos.movieapp.searchMovie;
 
-import marcos.movieapp.layers.BaseModel;
+import marcos.movieapp.BaseModel;
+import marcos.movieapp.Repository;
 import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import rx.Observable;
 

@@ -1,10 +1,9 @@
 package marcos.movieapp.searchMovie;
 
 import marcos.movieapp.helpers.RxHelper;
-import marcos.movieapp.layers.BaseModel;
-import marcos.movieapp.layers.BasePresenter;
-import marcos.movieapp.layers.BaseView;
-import marcos.movieapp.models.OMDBapi.MovieOnList;
+import marcos.movieapp.BaseModel;
+import marcos.movieapp.BasePresenter;
+import marcos.movieapp.BaseView;
 import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import marcos.movieapp.observers.OMDBResponseObserver;
 import rx.Subscription;
