@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="marcos.movieapp.searchMovie.SearchMovieActivity">
-    <item
+    <!--<item
         android:id="@+id/search"
         android:actionViewClass="android.widget.SearchView"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search_40dp"
         android:title="@string/search_title"
-        app:showAsAction="collapseActionView|ifRoom" />
+        app:showAsAction="collapseActionView|ifRoom" />-->
 </menu>

@@ -3,6 +3,7 @@ package marcos.movieapp.searchMovie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class SearchMovieActivity extends AppCompatActivity implements BaseView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search_movie);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,7 +35,7 @@ public class SearchMovieActivity extends AppCompatActivity implements BaseView {
     public void onStart() {
         super.onStart();
         presenter.setView(this);
-        presenter.loadData();
+        //presenter.loadData();
     }
 
     @Override
@@ -49,4 +50,9 @@ public class SearchMovieActivity extends AppCompatActivity implements BaseView {
         omdbResponse.getSearch();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_movie, menu);
+        return true;
+    }
 }
