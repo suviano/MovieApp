@@ -7,9 +7,9 @@ import java.util.List;
 
 public class OMDBResponse {
 
-    @SerializedName("MovieOnList")
+    @SerializedName("Search")
     @Expose
-    private List<MovieOnList> movieOnList = null;
+    private List<Search> search;
     @SerializedName("totalResults")
     @Expose
     private String totalResults;
@@ -17,12 +17,12 @@ public class OMDBResponse {
     @Expose
     private String response;
 
-    public List<MovieOnList> getMovieOnList() {
-        return movieOnList;
+    public List<Search> getSearch() {
+        return search;
     }
 
-    public void setMovieOnList(List<MovieOnList> movieOnList) {
-        this.movieOnList = movieOnList;
+    public void setSearch(List<Search> search) {
+        this.search = search;
     }
 
     public String getTotalResults() {

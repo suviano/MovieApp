@@ -1,6 +1,5 @@
 package marcos.movieapp.observers;
 
-import marcos.movieapp.models.OMDBapi.MovieOnList;
 import marcos.movieapp.models.OMDBapi.OMDBResponse;
 import rx.Observer;
 

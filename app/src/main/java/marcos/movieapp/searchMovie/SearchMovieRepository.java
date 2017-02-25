@@ -24,8 +24,7 @@ public class SearchMovieRepository implements Repository {
     @Override
     public Observable<OMDBResponse> getMoviesFromMemory() {
         if (isUpToDate()) {
-            //return omdbApiService.searchMovies("spider man");
-            return null;
+            return Observable.from(new OMDBResponse[]{moviesList});
         } else {
             timestamp = System.currentTimeMillis();
             return Observable.empty();
