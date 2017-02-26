@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SearchResponse {
+public class ResMovies {
     @SerializedName("Search")
     @Expose
     private List<Search> searches = null;

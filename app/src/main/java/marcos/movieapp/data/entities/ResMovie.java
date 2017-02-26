@@ -3,7 +3,7 @@ package marcos.movieapp.data.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+public class ResMovie {
     @SerializedName("Title")
     @Expose
     private String title;
