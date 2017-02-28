@@ -44,7 +44,7 @@ android {
     }
 
     android.variantFilter { variant ->
-        if(variant.buildType.name.equals('release')
+        if (variant.buildType.name.equals('release')
                 && variant.getFlavors().get(0).name.equals('mock')) {
             variant.setIgnore(true);
         }
@@ -69,28 +69,33 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+
+    compile 'com.google.code.gson:gson:2.6.2'
     compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
     compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
     compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
-    compile "com.squareup.sqlbrite:sqlbrite:$rootProject.sqlbriteVersion"
+
+    compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
+
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
 
     testCompile "junit:junit:$rootProject.ext.junitVersion"
-    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
-    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
-
-    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
-    androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
 
     androidTestCompile "junit:junit:$rootProject.ext.junitVersion"
     androidTestCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
 
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
@@ -101,4 +106,5 @@ dependencies {
     androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     androidTestCompile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     androidTestCompile "com.android.support:design:$rootProject.supportLibraryVersion"
+
 }

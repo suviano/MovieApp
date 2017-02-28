@@ -3,6 +3,8 @@ package marcos.movieapp.data.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 public class ResMovie {
     @SerializedName("Title")
     @Expose

@@ -1,4 +1,4 @@
-package marcos.movieapp.movies;
+package marcos.movieapp.home;
 
 import android.support.annotation.NonNull;
 
@@ -9,23 +9,22 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-class MoviePresenter implements Contract.Presenter {
+class MoviesPresenter implements Contract.Presenter {
 
     @NonNull
     private final MovieRepository movieRepository;
 
     @NonNull
     private final Contract.View view;
-
     @NonNull
     private final BaseSchedulerProvider schedulerProvider;
 
     @NonNull
     private CompositeSubscription subscription;
 
-    MoviePresenter(@NonNull MovieRepository movieRepository, @NonNull Contract.View view,
-                   @NonNull BaseSchedulerProvider schedulerProvider) {
-        this.movieRepository = checkNotNull(movieRepository, "Movie repo is null");
+    MoviesPresenter(@NonNull MovieRepository movieRepository, @NonNull Contract.View view,
+                    @NonNull BaseSchedulerProvider schedulerProvider) {
+        this.movieRepository = checkNotNull(movieRepository, "MovieOverview repo is null");
         this.view = checkNotNull(view, "View is null");
         this.schedulerProvider = checkNotNull(schedulerProvider, "Scheduler is null");
 
@@ -43,12 +42,11 @@ class MoviePresenter implements Contract.Presenter {
         subscription.clear();
     }
 
-
     public void searchMovie(String name) {
-        this.subscription.add(movieRepository
-            .getMovies(name)
+        this.subscription.add(movieRepository.getMovies(name)
             .subscribeOn(schedulerProvider.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(view::showResult));
+            .subscribe(view::displaySearchResult));
     }
+
 }

@@ -1,9 +1,14 @@
 package marcos.movieapp.data.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Search {
+import java.io.Serializable;
+
+public class MovieOverview implements Parcelable {
     @SerializedName("Title")
     @Expose
     private String title;
@@ -19,6 +24,26 @@ public class Search {
     @SerializedName("Poster")
     @Expose
     private String poster;
+
+    protected MovieOverview(Parcel in) {
+        title = in.readString();
+        year = in.readString();
+        imdbID = in.readString();
+        type = in.readString();
+        poster = in.readString();
+    }
+
+    public static final Creator<MovieOverview> CREATOR = new Creator<MovieOverview>() {
+        @Override
+        public MovieOverview createFromParcel(Parcel in) {
+            return new MovieOverview(in);
+        }
+
+        @Override
+        public MovieOverview[] newArray(int size) {
+            return new MovieOverview[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -58,5 +83,19 @@ public class Search {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(year);
+        dest.writeString(imdbID);
+        dest.writeString(type);
+        dest.writeString(poster);
     }
 }

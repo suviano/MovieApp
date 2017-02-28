@@ -3,25 +3,29 @@ package marcos.movieapp.data.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ResMovies {
     @SerializedName("Search")
     @Expose
-    private List<Search> searches = null;
+    private List<MovieOverview> movies = null;
     @SerializedName("totalResults")
     @Expose
     private String totalResults;
     @SerializedName("Response")
     @Expose
     private String response;
+    @SerializedName("Error")
+    @Expose
+    private String error;
 
-    public List<Search> getSearches() {
-        return searches;
+    public List<MovieOverview> getMovies() {
+        return movies;
     }
 
-    public void setSearches(List<Search> searches) {
-        this.searches = searches;
+    public void setMovies(List<MovieOverview> movies) {
+        this.movies = movies;
     }
 
     public String getTotalResults() {
@@ -39,4 +43,13 @@ public class ResMovies {
     public void setResponse(String response) {
         this.response = response;
     }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
 }

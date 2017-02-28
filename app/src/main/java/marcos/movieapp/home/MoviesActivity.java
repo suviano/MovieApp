@@ -1,54 +1,46 @@
-package marcos.movieapp.movies;
+package marcos.movieapp.home;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.SearchView;
 
 import com.google.common.base.Strings;
 
 import marcos.movieapp.Injection;
 import marcos.movieapp.R;
-import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.utils.FragmentUtils;
 
-public class MovieActivity extends AppCompatActivity {
 
-    private final String TAG = MovieActivity.class.getName();
-
+public class MoviesActivity extends AppCompatActivity {
     SearchView searchView;
-
-    private MoviePresenter moviePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
+        setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        MovieFragment movieFragment = (MovieFragment)
-            getSupportFragmentManager().findFragmentById(R.id.movie_result);
-        if (movieFragment == null) {
-            movieFragment = MovieFragment.newInstance();
+        MoviesFragment moviesFragment = (MoviesFragment)
+            getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        if (moviesFragment == null) {
+            moviesFragment = MoviesFragment.newInstance();
             FragmentUtils.addFragmentToActivity(
-                getSupportFragmentManager(), movieFragment, R.id.movie_result);
+                getSupportFragmentManager(), moviesFragment, R.id.frame_container);
         }
 
-        moviePresenter = new MoviePresenter(Injection.provideMovieRepository(this),
-            movieFragment, Injection.provideSchedulerProvider());
+        MoviesPresenter moviesPresenter = new MoviesPresenter(Injection.provideMovieRepository(this),
+            moviesFragment, Injection.provideSchedulerProvider());
 
         searchView = (SearchView) findViewById(R.id.search_movie);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (Strings.isNullOrEmpty(query)) {
-                    return false;
-                } else {
-                    moviePresenter.searchMovie(query);
-                    return true;
+                if (!Strings.isNullOrEmpty(query)) {
+                    moviesPresenter.searchMovie(query);
                 }
+                return true;
             }
 
             @Override

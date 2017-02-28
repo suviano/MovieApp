@@ -1,4 +1,4 @@
-package marcos.movieapp.movies;
+package marcos.movieapp.home;
 
 import marcos.movieapp.BasePresenter;
 import marcos.movieapp.BaseView;
@@ -10,6 +10,6 @@ interface Contract {
     }
 
     interface View extends BaseView<Presenter> {
-        void showResult(ResMovies resMovies);
+        void displaySearchResult(ResMovies resMovies);
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <ImageView
+        android:id="@+id/movie_poster"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/movie_poster"
+        app:srcCompat="@color/cardview_dark_background"
+        tools:src="@drawable/movie_poster_placeholder" />
+
+    <LinearLayout
+        android:id="@+id/linear_container_movie_text_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/movie_poster"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:text="Spider Man" />
+
+        <TextView
+            android:id="@+id/txt_movie_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:text="2004" />
+    </LinearLayout>
+
+</RelativeLayout>

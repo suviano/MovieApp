@@ -6,7 +6,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class ApiMoviesSearch {
+public class ApiMoviesSearch {
+    public static String BASE_URL = "http://www.omdbapi.com";
 
     private Retrofit provideRetrofit(String BASE_URL, OkHttpClient client) {
         return new Retrofit.Builder()
@@ -25,8 +26,7 @@ class ApiMoviesSearch {
             .build();
     }
 
-    public OMDBApiService provideService() {
-        String BASE_URL = "http://www.omdbapi.com";
+    OMDBApiService provideService() {
         return provideRetrofit(BASE_URL, provideClient())
             .create(OMDBApiService.class);
     }
