@@ -13,8 +13,6 @@ public class MovieLocalDataSource implements MovieDataSource {
     @Nullable
     private static MovieLocalDataSource INSTANCE = null;
 
-    private final String BASE_URL = "http://www.omdbapi.com";
-
     private MovieLocalDataSource() {
     }
 

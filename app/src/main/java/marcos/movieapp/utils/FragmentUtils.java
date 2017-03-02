@@ -13,7 +13,6 @@ public class FragmentUtils {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
-        transaction.commit();
+        transaction.add(frameId, fragment).addToBackStack(null).commit();
     }
 }

@@ -1,14 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="marcos.movieapp.home.MoviesActivity">
+    tools:context="marcos.movieapp.movie.MovieActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/save_movie_menu_item"
+        android:icon="@drawable/save_menu"
+        android:title="@string/save_movie_menu_item"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/search_movie"
-        android:title="@string/search_movie"
-        app:showAsAction="never" />
+        android:id="@+id/delete_movie_menu_item"
+        android:icon="@drawable/delete_menu"
+        android:title="@string/delete_movie_menu_item"
+        app:showAsAction="ifRoom" />
 </menu>

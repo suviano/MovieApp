@@ -2,19 +2,13 @@ package marcos.movieapp.searchMovie;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.SearchView;
 
 import com.google.common.base.Strings;
 
-import java.util.List;
-
 import marcos.movieapp.Injection;
 import marcos.movieapp.R;
-import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.utils.FragmentUtils;
-
-import static marcos.movieapp.home.MoviesFragment.SEARCH_MOVIE_RESULT;
 
 public class SearchMovieActivity extends AppCompatActivity {
 

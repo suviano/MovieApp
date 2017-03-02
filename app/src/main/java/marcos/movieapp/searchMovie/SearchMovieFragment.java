@@ -1,5 +1,6 @@
 package marcos.movieapp.searchMovie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,17 +17,21 @@ import java.util.List;
 import marcos.movieapp.R;
 import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovies;
+import marcos.movieapp.movie.MovieActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static marcos.movieapp.home.MoviesFragment.SEARCH_MOVIE_RESULT;
 
-public class SearchMovieFragment extends Fragment implements ContractSearchMovie.View {
+public class SearchMovieFragment extends Fragment
+    implements ContractSearchMovie.View, SearchResultClickListener {
 
-    final String TAG = SearchMovieFragment.class.getName();
+    final static String TAG = SearchMovieFragment.class.getName();
+    public final static String MOVIE_OVERVIEW_BUNDLE = "MOVIE_OVERVIEW_BUNDLE";
 
     private ContractSearchMovie.Presenter presenter;
-    private List<MovieOverview> movieOverviews;
     private SearchMovieListAdapter adapter;
+
+    private List<MovieOverview> movieOverviews;
 
     public SearchMovieFragment() {
     }
@@ -40,7 +45,7 @@ public class SearchMovieFragment extends Fragment implements ContractSearchMovie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        this.movieOverviews = getMovieFromIntent();
+        movieOverviews = getMovieFromIntent();
 
         View root = inflater.inflate(R.layout.fragment_search_movie, container, false);
 
@@ -48,8 +53,8 @@ public class SearchMovieFragment extends Fragment implements ContractSearchMovie
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        adapter = new SearchMovieListAdapter(movieOverviews, getContext(), this);
 
-        adapter = new SearchMovieListAdapter(movieOverviews, getContext());
         recyclerView.setAdapter(adapter);
 
         return root;
@@ -74,6 +79,7 @@ public class SearchMovieFragment extends Fragment implements ContractSearchMovie
 
     @Override
     public void displaySearchResult(ResMovies resMovies) {
+        this.movieOverviews = resMovies.getMovies();
         if (resMovies.getResponse().equalsIgnoreCase("true")) {
             adapter.updateMoviesOverview(resMovies.getMovies());
         } else {
@@ -84,5 +90,14 @@ public class SearchMovieFragment extends Fragment implements ContractSearchMovie
     public List<MovieOverview> getMovieFromIntent() {
         return getActivity().getIntent()
             .getParcelableArrayListExtra(SEARCH_MOVIE_RESULT);
+    }
+
+    @Override
+    public void seeDetails(View view, MovieOverview movieOverview) {
+        Intent intent = new Intent(getActivity(), MovieActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(MOVIE_OVERVIEW_BUNDLE, movieOverview);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
