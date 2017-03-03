@@ -39,7 +39,7 @@ public class SearchMovieActivity extends AppCompatActivity {
                 if (Strings.isNullOrEmpty(query)) {
                     return false;
                 } else {
-                    searchMoviePresenter.searchMovie(query);
+                    searchMoviePresenter.searchMovies(query);
                     return true;
                 }
             }

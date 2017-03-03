@@ -2,9 +2,10 @@ package marcos.movieapp.searchMovie;
 
 import android.support.annotation.NonNull;
 
+import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.data.source.MovieRepository;
 import marcos.movieapp.utils.schedulers.BaseSchedulerProvider;
-import rx.android.schedulers.AndroidSchedulers;
+import rx.Observer;
 import rx.subscriptions.CompositeSubscription;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -43,8 +44,25 @@ class SearchMoviePresenter implements ContractSearchMovie.Presenter {
         subscription.clear();
     }
 
-    public void searchMovie(String name) {
+    public void searchMovies(String name) {
         this.subscription.add(movieRepository.getMovies(name).subscribeOn(schedulerProvider.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe(view::displaySearchResult));
+            .observeOn(schedulerProvider.ui()).subscribe(new Observer<ResMovies>() {
+                private ResMovies resMovies;
+
+                @Override
+                public void onCompleted() {
+                    view.displaySearchResult(resMovies);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onNext(ResMovies resMovies) {
+                    this.resMovies = resMovies;
+                }
+            }));
     }
 }

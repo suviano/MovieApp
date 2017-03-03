@@ -23,11 +23,11 @@
         </activity>
         <activity
             android:name=".searchMovie.SearchMovieActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".movie.MovieActivity"
             android:label="@string/title_activity_movie"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

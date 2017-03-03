@@ -6,7 +6,7 @@ import marcos.movieapp.data.entities.ResMovies;
 
 interface ContractSearchMovie {
     interface Presenter extends BasePresenter {
-        void searchMovie(String name);
+        void searchMovies(String name);
     }
 
     interface View extends BaseView<Presenter> {

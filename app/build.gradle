@@ -48,7 +48,7 @@ dependencies {
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
 
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
     compile "com.google.guava:guava:$rootProject.guavaVersion"
 
     compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
@@ -56,9 +56,9 @@ dependencies {
 
     compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
 
     testCompile "junit:junit:$rootProject.ext.junitVersion"

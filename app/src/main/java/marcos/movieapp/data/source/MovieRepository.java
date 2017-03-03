@@ -39,7 +39,7 @@ public class MovieRepository implements MovieDataSource {
 
     @Override
     public Observable<ResMovie> getMovieByTitleId(@NonNull String titleId) {
-        return null;
+        return remoteMovieDataSource.getMovieByTitleId(titleId);
     }
 
     @Override

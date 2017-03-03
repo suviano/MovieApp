@@ -95,9 +95,7 @@ public class SearchMovieFragment extends Fragment
     @Override
     public void seeDetails(View view, MovieOverview movieOverview) {
         Intent intent = new Intent(getActivity(), MovieActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(MOVIE_OVERVIEW_BUNDLE, movieOverview);
-        intent.putExtras(bundle);
+        intent.putExtra(MOVIE_OVERVIEW_BUNDLE, movieOverview);
         startActivity(intent);
     }
 }

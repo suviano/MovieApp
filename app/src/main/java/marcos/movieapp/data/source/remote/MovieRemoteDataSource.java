@@ -12,13 +12,16 @@ public class MovieRemoteDataSource implements MovieDataSource {
 
     @Nullable
     private static MovieRemoteDataSource INSTANCE = null;
+    @NonNull
+    private OMDBApiService omdbApiService;
 
-    private MovieRemoteDataSource() {
+    private MovieRemoteDataSource(@NonNull OMDBApiService omdbApiService) {
+        this.omdbApiService = omdbApiService;
     }
 
     public static MovieRemoteDataSource getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new MovieRemoteDataSource();
+            INSTANCE = new MovieRemoteDataSource(new ApiMoviesSearch().provideService());
         }
         return INSTANCE;
     }
@@ -29,18 +32,19 @@ public class MovieRemoteDataSource implements MovieDataSource {
 
     @Override
     public Observable<ResMovies> getMovies(@NonNull String name) {
-        Observable<ResMovies> resMoviesObservable = new ApiMoviesSearch()
-            .provideService().searchMovie(name);
+        Observable<ResMovies> resMoviesObservable = omdbApiService.searchMovie(name);
         return resMoviesObservable.single(resMovies -> true);
     }
 
     @Override
     public Observable<ResMovie> getMovieByTitleId(@NonNull String titleId) {
-        return null;
+        Observable<ResMovie> resMovieObservable = omdbApiService.searchMovieByIdOrTitle(titleId);
+        return resMovieObservable.single(resMovie -> true);
     }
 
     @Override
     public void saveMovie(@NonNull ResMovie resMovie) {
 
     }
+
 }
