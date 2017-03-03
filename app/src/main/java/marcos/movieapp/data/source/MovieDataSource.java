@@ -3,8 +3,6 @@ package marcos.movieapp.data.source;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import rx.Observable;
