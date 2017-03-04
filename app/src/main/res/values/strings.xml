@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="movie_description_txt">
+    </string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -90,7 +92,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
-    <string name="movie_poster">movie_poster</string>
+    <string name="movie_poster">movie poster</string>
     <string name="search_movie">search movie</string>
     <string name="title_activity_movie">MovieActivity</string>
     <string name="save_movie_menu_item">save movie menu item</string>

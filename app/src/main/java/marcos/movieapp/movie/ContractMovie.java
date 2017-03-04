@@ -1,5 +1,7 @@
 package marcos.movieapp.movie;
 
+import android.support.annotation.NonNull;
+
 import marcos.movieapp.BasePresenter;
 import marcos.movieapp.BaseView;
 import marcos.movieapp.data.entities.MovieOverview;
@@ -13,5 +15,8 @@ interface ContractMovie {
         void displaySearchResult(ResMovie resMovie);
 
         MovieOverview getMovieFromIntent();
+
+        void configureMovieTitle(@NonNull String title);
+
     }
 }

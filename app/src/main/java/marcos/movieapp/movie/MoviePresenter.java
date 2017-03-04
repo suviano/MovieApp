@@ -1,6 +1,7 @@
 package marcos.movieapp.movie;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
@@ -59,7 +60,7 @@ class MoviePresenter implements ContractMovie.Presenter {
 
                 @Override
                 public void onError(Throwable e) {
-                    e.printStackTrace();
+                    Log.wtf("MoviePresenter", e.getCause());
                 }
 
                 @Override
