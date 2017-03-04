@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import marcos.movieapp.R;
 import marcos.movieapp.data.entities.MovieOverview;
@@ -25,9 +30,8 @@ import static marcos.movieapp.home.MoviesFragment.SEARCH_MOVIE_RESULT;
 public class SearchMovieFragment extends Fragment
     implements ContractSearchMovie.View, SearchResultClickListener {
 
-    final static String TAG = SearchMovieFragment.class.getName();
     public final static String MOVIE_OVERVIEW_BUNDLE = "MOVIE_OVERVIEW_BUNDLE";
-
+    final static String TAG = SearchMovieFragment.class.getName();
     private ContractSearchMovie.Presenter presenter;
     private SearchMovieListAdapter adapter;
 

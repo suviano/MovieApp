@@ -74,15 +74,8 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
     @Override
     public void configureMovieTitle(@NonNull String title) {
         setSupportActionBar(toolbar);
-        if (appBar != null) {
-            if (appBar.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
-                CoordinatorLayout.LayoutParams layoutParams =
-                    (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
-                layoutParams.height = getResources().getDisplayMetrics().widthPixels;
-            }
-        }
         if (getSupportActionBar() != null) {
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if (collapsingToolbar != null) {
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 collapsingToolbar.setTitle(title);
