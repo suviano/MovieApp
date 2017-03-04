@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/movie_poster"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                tools:src="@drawable/movie_poster_placeholder" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/movie_toolbar"
@@ -47,12 +48,95 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/movie_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/movie_description_txt" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movie_title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                tools:src="Spider Man (2016)" />
+
+            <TextView
+                android:id="@+id/movie_subtitle_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                tools:src="2h 16min | Action, Adventure | 6 July 2012" />
+
+            <TextView
+                android:id="@+id/movie_description_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                tools:text="@string/movie_description_placeholder_txt" />
+
+            <LinearLayout
+                android:id="@+id/movie_director_container"
+                style="@style/TextAppearance.AppCompat.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/movie_director_container_title_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/movie_director_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/movie_writers_placeholder_txt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/movie_writers_container"
+                style="@style/TextAppearance.AppCompat.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/movie_writers_container_title_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/movie_writers_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/movie_writers_placeholder_txt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/movie_actors_container"
+                style="@style/TextAppearance.AppCompat.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/movie_actors_container_title_txt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/movie_actors_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/movie_writers_placeholder_txt" />
+
+            </LinearLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -61,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/star_outline"
+        android:src="@drawable/save_menu"
         app:layout_anchor="@id/movie_app_bar"
         app:layout_anchorGravity="bottom|end" />
 

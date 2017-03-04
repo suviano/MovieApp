@@ -43,7 +43,7 @@ class MoviesPresenter implements Contract.Presenter {
     }
 
     public void searchMovie(String name) {
-        this.subscription.add(movieRepository.getMovies(name)
+        this.subscription.add(movieRepository.getMovies(name.toLowerCase())
             .subscribeOn(schedulerProvider.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(view::displaySearchResult));

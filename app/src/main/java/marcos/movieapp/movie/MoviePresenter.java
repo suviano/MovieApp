@@ -53,6 +53,7 @@ class MoviePresenter implements ContractMovie.Presenter {
             .observeOn(schedulerProvider.ui())
             .subscribe(new Observer<ResMovie>() {
                 private ResMovie resMovie;
+
                 @Override
                 public void onCompleted() {
                     view.displaySearchResult(resMovie);

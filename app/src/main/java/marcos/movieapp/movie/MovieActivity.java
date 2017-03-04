@@ -9,6 +9,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import marcos.movieapp.Injection;
 import marcos.movieapp.R;
@@ -25,6 +29,16 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
     private Toolbar toolbar;
     private AppBarLayout appBar;
     private CollapsingToolbarLayout collapsingToolbar;
+    private FloatingActionButton fab;
+
+    private ImageView imgPoster;
+
+    private TextView movieTitle;
+    private TextView movieSubtitle;
+    private TextView movieDescription;
+    private TextView movieDirector;
+    private TextView movieWriters;
+    private TextView movieActors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +51,20 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
         collapsingToolbar =
             (CollapsingToolbarLayout) findViewById(R.id.movie_collapsing_toolbar_layout);
 
+        imgPoster = (ImageView) findViewById(R.id.movie_poster_img);
+
+        movieTitle = (TextView) findViewById(R.id.movie_title_txt);
+        movieSubtitle = (TextView) findViewById(R.id.movie_subtitle_txt);
+        movieDescription = (TextView) findViewById(R.id.movie_description_txt);
+        movieDirector = (TextView) findViewById(R.id.movie_director_txt);
+        movieWriters = (TextView) findViewById(R.id.movie_writers_txt);
+        movieActors = (TextView) findViewById(R.id.movie_actors_txt);
+
         presenter = new MoviePresenter(Injection.provideMovieRepository(getApplicationContext()),
             this, Injection.provideSchedulerProvider(), getMovieFromIntent());
         presenter.subscribe();
 
-        FloatingActionButton fab =
-            (FloatingActionButton) findViewById(R.id.add_movie_favorites_fab);
+        fab = (FloatingActionButton) findViewById(R.id.add_movie_favorites_fab);
         fab.setOnClickListener(view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -62,8 +84,19 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
 
     @Override
     public void displaySearchResult(ResMovie resMovie) {
-        // TODO
+        loadPoster(resMovie.getPoster());
         configureMovieTitle(resMovie.getTitle());
+        movieTitle.setText(String.format("%s (%s)", resMovie.getTitle(), resMovie.getTyar()));
+        movieSubtitle.setText(String.format("%s | %s | %s", resMovie.getRuntime(),
+            resMovie.getGenre(), resMovie.getReleased()));
+        movieDescription.setText(resMovie.getPlot());
+        movieDirector.setText(resMovie.getDirector());
+        movieWriters.setText(resMovie.getDirector());
+        movieActors.setText(resMovie.getActors());
+    }
+
+    public void loadPoster(String posterUrl) {
+        Picasso.with(getApplicationContext()).load(posterUrl).into(imgPoster);
     }
 
     @Override
