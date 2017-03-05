@@ -9,6 +9,9 @@ import marcos.movieapp.data.entities.ResMovie;
 
 interface ContractMovie {
     interface Presenter extends BasePresenter {
+        void saveMovie(ResMovie resMovie);
+
+        void deleteMovie(String movieTitle);
     }
 
     interface View extends BaseView<Presenter> {
@@ -17,6 +20,5 @@ interface ContractMovie {
         MovieOverview getMovieFromIntent();
 
         void configureMovieTitle(@NonNull String title);
-
     }
 }

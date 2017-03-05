@@ -12,6 +12,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 class SearchMoviePresenter implements ContractSearchMovie.Presenter {
 
+    final static String TAG = "SearchMovie";
+
     @NonNull
     private final MovieRepository movieRepository;
 
@@ -56,7 +58,6 @@ class SearchMoviePresenter implements ContractSearchMovie.Presenter {
 
                 @Override
                 public void onError(Throwable e) {
-                    e.printStackTrace();
                 }
 
                 @Override

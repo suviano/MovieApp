@@ -11,13 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import marcos.movieapp.R;
 import marcos.movieapp.data.entities.MovieOverview;
@@ -31,10 +27,10 @@ public class SearchMovieFragment extends Fragment
     implements ContractSearchMovie.View, SearchResultClickListener {
 
     public final static String MOVIE_OVERVIEW_BUNDLE = "MOVIE_OVERVIEW_BUNDLE";
-    final static String TAG = SearchMovieFragment.class.getName();
+
     private ContractSearchMovie.Presenter presenter;
     private SearchMovieListAdapter adapter;
-
+    private RecyclerView recyclerView;
     private List<MovieOverview> movieOverviews;
 
     public SearchMovieFragment() {
@@ -53,7 +49,7 @@ public class SearchMovieFragment extends Fragment
 
         View root = inflater.inflate(R.layout.fragment_search_movie, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.movie_overview_recycler_view);
+        recyclerView = (RecyclerView) root.findViewById(R.id.movie_overview_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -87,7 +83,8 @@ public class SearchMovieFragment extends Fragment
         if (resMovies.getResponse().equalsIgnoreCase("true")) {
             adapter.updateMoviesOverview(resMovies.getMovies());
         } else {
-            Log.wtf(TAG, resMovies.getError());
+            Toast.makeText(getActivity(), resMovies.getError(), Toast.LENGTH_LONG).show();
+            Log.wtf(SearchMoviePresenter.TAG, resMovies.getError());
         }
     }
 

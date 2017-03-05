@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MoviesFragment extends Fragment implements Contract.View {
 
     public static final String SEARCH_MOVIE_RESULT = "SEARCH_MOVIE_RESULT";
-    public static final String TAG = MoviesFragment.class.getName();
 
     private Contract.Presenter presenter;
 
@@ -72,7 +71,7 @@ public class MoviesFragment extends Fragment implements Contract.View {
                     Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
-                Log.wtf(TAG, resMovies.getError());
+                Log.wtf(MoviesPresenter.TAG, resMovies.getError());
             }
         }
     }

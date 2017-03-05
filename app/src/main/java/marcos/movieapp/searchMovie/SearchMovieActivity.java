@@ -11,8 +11,6 @@ import marcos.movieapp.R;
 import marcos.movieapp.utils.FragmentUtils;
 
 public class SearchMovieActivity extends AppCompatActivity {
-
-    private static final String TAG = SearchMovieActivity.class.getName();
     SearchView searchView;
     SearchMoviePresenter searchMoviePresenter;
 

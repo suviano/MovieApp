@@ -36,4 +36,6 @@ ext {
     retrofitVersion = '2.1.0'
 
     picassoVersion = '2.5.2'
+
+    sqlbriteVersion = '1.1.1'
 }

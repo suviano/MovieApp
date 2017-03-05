@@ -3,13 +3,9 @@ package marcos.movieapp.data.source;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.function.Predicate;
-
-import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import rx.Observable;
-import rx.functions.Func1;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -51,4 +47,10 @@ public class MovieRepository implements MovieDataSource {
     public void saveMovie(@NonNull ResMovie resMovie) {
         localMovieDataSource.saveMovie(resMovie);
     }
+
+    @Override
+    public void deleteMovie(@NonNull String movieTitle) {
+        localMovieDataSource.deleteMovie(movieTitle);
+    }
+
 }

@@ -21,8 +21,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 class SearchMovieListAdapter extends
     RecyclerView.Adapter<SearchMovieListAdapter.MovieOverviewHolder> implements View.OnClickListener {
 
-    private static final String TAG = SearchMovieListAdapter.class.getName();
-
     @NonNull
     private SearchResultClickListener searchResultClickListener;
 

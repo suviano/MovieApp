@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +30,8 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
     private Toolbar toolbar;
     private AppBarLayout appBar;
     private CollapsingToolbarLayout collapsingToolbar;
-    private FloatingActionButton fab;
+
+    private ResMovie resMovie;
 
     private ImageView imgPoster;
 
@@ -63,12 +65,6 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
         presenter = new MoviePresenter(Injection.provideMovieRepository(getApplicationContext()),
             this, Injection.provideSchedulerProvider(), getMovieFromIntent());
         presenter.subscribe();
-
-        fab = (FloatingActionButton) findViewById(R.id.add_movie_favorites_fab);
-        fab.setOnClickListener(view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        );
     }
 
     @Override
@@ -84,7 +80,8 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
 
     @Override
     public void displaySearchResult(ResMovie resMovie) {
-        loadPoster(resMovie.getPoster());
+        this.resMovie = resMovie;
+        Picasso.with(getApplicationContext()).load(resMovie.getPoster()).into(imgPoster);
         configureMovieTitle(resMovie.getTitle());
         movieTitle.setText(String.format("%s (%s)", resMovie.getTitle(), resMovie.getTyar()));
         movieSubtitle.setText(String.format("%s | %s | %s", resMovie.getRuntime(),
@@ -95,8 +92,23 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
         movieActors.setText(resMovie.getActors());
     }
 
-    public void loadPoster(String posterUrl) {
-        Picasso.with(getApplicationContext()).load(posterUrl).into(imgPoster);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_movie, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_movie_menu_item:
+                presenter.saveMovie(resMovie);
+                return true;
+            case R.id.delete_movie_menu_item:
+                Log.wtf(MoviePresenter.TAG, "delete");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -117,5 +129,4 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
             }
         }
     }
-
 }

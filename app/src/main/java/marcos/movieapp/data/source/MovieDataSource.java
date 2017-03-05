@@ -13,4 +13,6 @@ public interface MovieDataSource {
     Observable<ResMovie> getMovieByTitleId(@NonNull String titleId);
 
     void saveMovie(@NonNull ResMovie resMovie);
+
+    void deleteMovie(@NonNull String movieTitle);
 }
