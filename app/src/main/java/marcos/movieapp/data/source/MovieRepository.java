@@ -49,8 +49,8 @@ public class MovieRepository implements MovieDataSource {
     }
 
     @Override
-    public void deleteMovie(@NonNull String movieTitle) {
-        localMovieDataSource.deleteMovie(movieTitle);
+    public boolean deleteMovie(@NonNull String movieTitle) {
+        return localMovieDataSource.deleteMovie(movieTitle);
     }
 
 }

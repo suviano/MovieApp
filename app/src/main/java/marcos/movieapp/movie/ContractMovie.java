@@ -20,5 +20,7 @@ interface ContractMovie {
         MovieOverview getMovieFromIntent();
 
         void configureMovieTitle(@NonNull String title);
+
+        void operationComplete(@NonNull String operation);
     }
 }

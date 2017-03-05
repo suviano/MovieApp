@@ -14,5 +14,5 @@ public interface MovieDataSource {
 
     void saveMovie(@NonNull ResMovie resMovie);
 
-    void deleteMovie(@NonNull String movieTitle);
+    boolean deleteMovie(@NonNull String movieTitle);
 }

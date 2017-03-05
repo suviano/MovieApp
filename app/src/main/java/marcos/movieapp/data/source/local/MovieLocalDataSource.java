@@ -86,8 +86,8 @@ public class MovieLocalDataSource implements MovieDataSource {
     }
 
     @Override
-    public void deleteMovie(@NonNull String movieId) {
+    public boolean deleteMovie(@NonNull String movieId) {
         String selection = MovieEntry.COLUMN_IMDB_ID + " LIKE ?";
-        briteDatabase.delete(MovieEntry.TABLE_NAME, selection, movieId);
+        return 1 == briteDatabase.delete(MovieEntry.TABLE_NAME, selection, movieId);
     }
 }

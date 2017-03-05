@@ -71,10 +71,14 @@ class MoviePresenter implements ContractMovie.Presenter {
     @Override
     public void saveMovie(ResMovie resMovie) {
         repository.saveMovie(resMovie);
+        view.operationComplete("Movie saved!");
     }
 
     @Override
-    public void deleteMovie(String movieTitle) {
-        repository.deleteMovie(movieTitle);
+    public void deleteMovie(String movieId) {
+        boolean deleted = repository.deleteMovie(movieId);
+        if (deleted) {
+            view.operationComplete("Movie deleted");
+        }
     }
 }

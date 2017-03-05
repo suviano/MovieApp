@@ -7,11 +7,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -128,5 +128,10 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
             }
         }
+    }
+
+    @Override
+    public void operationComplete(@NonNull String operation) {
+        Toast.makeText(this, operation, Toast.LENGTH_SHORT).show();
     }
 }
