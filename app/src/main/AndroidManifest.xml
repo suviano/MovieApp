@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MovieApp"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +29,10 @@
             android:name=".movie.MovieActivity"
             android:label="@string/title_activity_movie"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="30433b9c39f697dfdeb9fa4a0884d0b183f6837f" />
     </application>
 
 </manifest>

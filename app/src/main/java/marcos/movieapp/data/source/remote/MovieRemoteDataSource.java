@@ -47,4 +47,9 @@ public class MovieRemoteDataSource implements MovieDataSource {
 
     }
 
+    @Override
+    public void deleteMovie(@NonNull String movieTitle) {
+        // Unusedgit st
+    }
+
 }
