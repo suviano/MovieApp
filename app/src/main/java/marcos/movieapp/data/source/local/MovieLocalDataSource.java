@@ -16,6 +16,7 @@ import marcos.movieapp.utils.schedulers.BaseSchedulerProvider;
 import rx.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static marcos.movieapp.data.source.local.MovieContract.MovieEntry;
 
 
 public class MovieLocalDataSource implements MovieDataSource {
@@ -60,33 +61,33 @@ public class MovieLocalDataSource implements MovieDataSource {
     public void saveMovie(@NonNull ResMovie resMovie) {
         checkNotNull(resMovie);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MovieContract.MovieEntry._ID, resMovie.get_id());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_TITLE, resMovie.getTitle());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_YEAR, resMovie.getTyar());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_RATED, resMovie.getRated());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_RELEASED, resMovie.getReleased());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_RUNTIME, resMovie.getRuntime());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_GENRE, resMovie.getGenre());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_DIRECTOR, resMovie.getDirector());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_WRITER, resMovie.getWriter());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_ACTORS, resMovie.getActors());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_PLOT, resMovie.getPlot());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_LANGUAGE, resMovie.getLanguage());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_COUNTRY, resMovie.getCountry());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_AWARDS, resMovie.getAwards());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_POSTER, resMovie.getPoster());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_METASCORE, resMovie.getMetaScore());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_IMDB_RATING, resMovie.getImdbRating());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_IMDB_VOTES, resMovie.getImdbVotes());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_IMDB_ID, resMovie.getImdbID());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_TYPE, resMovie.getType());
-        contentValues.put(MovieContract.MovieEntry.COLUMN_TOTAL_SEASONS, resMovie.getTotalSeasons());
-        briteDatabase.insert(MovieContract.MovieEntry.TABLE_NAME,
+        contentValues.put(MovieEntry.COLUMN_TITLE, resMovie.getTitle());
+        contentValues.put(MovieEntry.COLUMN_YEAR, resMovie.getTyar());
+        contentValues.put(MovieEntry.COLUMN_RATED, resMovie.getRated());
+        contentValues.put(MovieEntry.COLUMN_RELEASED, resMovie.getReleased());
+        contentValues.put(MovieEntry.COLUMN_RUNTIME, resMovie.getRuntime());
+        contentValues.put(MovieEntry.COLUMN_GENRE, resMovie.getGenre());
+        contentValues.put(MovieEntry.COLUMN_DIRECTOR, resMovie.getDirector());
+        contentValues.put(MovieEntry.COLUMN_WRITER, resMovie.getWriter());
+        contentValues.put(MovieEntry.COLUMN_ACTORS, resMovie.getActors());
+        contentValues.put(MovieEntry.COLUMN_PLOT, resMovie.getPlot());
+        contentValues.put(MovieEntry.COLUMN_LANGUAGE, resMovie.getLanguage());
+        contentValues.put(MovieEntry.COLUMN_COUNTRY, resMovie.getCountry());
+        contentValues.put(MovieEntry.COLUMN_AWARDS, resMovie.getAwards());
+        contentValues.put(MovieEntry.COLUMN_POSTER, resMovie.getPoster());
+        contentValues.put(MovieEntry.COLUMN_METASCORE, resMovie.getMetaScore());
+        contentValues.put(MovieEntry.COLUMN_IMDB_RATING, resMovie.getImdbRating());
+        contentValues.put(MovieEntry.COLUMN_IMDB_VOTES, resMovie.getImdbVotes());
+        contentValues.put(MovieEntry.COLUMN_IMDB_ID, resMovie.getImdbID());
+        contentValues.put(MovieEntry.COLUMN_TYPE, resMovie.getType());
+        contentValues.put(MovieEntry.COLUMN_TOTAL_SEASONS, resMovie.getTotalSeasons());
+        briteDatabase.insert(MovieEntry.TABLE_NAME,
             contentValues, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     @Override
-    public void deleteMovie(@NonNull String movieTitle) {
-        // TODO: delete movie from db
+    public void deleteMovie(@NonNull String movieId) {
+        String selection = MovieEntry.COLUMN_IMDB_ID + " LIKE ?";
+        briteDatabase.delete(MovieEntry.TABLE_NAME, selection, movieId);
     }
 }

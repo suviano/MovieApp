@@ -105,7 +105,7 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
                 presenter.saveMovie(resMovie);
                 return true;
             case R.id.delete_movie_menu_item:
-                Log.wtf(MoviePresenter.TAG, "delete");
+                presenter.deleteMovie(resMovie.getImdbID());
                 return true;
         }
         return super.onOptionsItemSelected(item);

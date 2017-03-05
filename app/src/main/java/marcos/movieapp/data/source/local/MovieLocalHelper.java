@@ -8,7 +8,6 @@ class MovieLocalHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "Movie.db";
     private static final String TEXT_TYPE = " TEXT";
-    private static final String COMMA_SEP = ",";
 
     private static final String SQL_CREATE_ENTRIES =
         String.format("CREATE TABLE %s (%s %s PRIMARY KEY, " +
@@ -30,11 +29,10 @@ class MovieLocalHelper extends SQLiteOpenHelper {
                 "%s %s ,\n" +
                 "%s %s ,\n" +
                 "%s %s ,\n" +
-                "%s %s ,\n" +
                 "%s %s" +
                 " )",
             MovieContract.MovieEntry.TABLE_NAME,
-            MovieContract.MovieEntry._ID, TEXT_TYPE,
+            MovieContract.MovieEntry.COLUMN_IMDB_ID, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_TITLE, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_YEAR, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_RATED, TEXT_TYPE,
@@ -52,7 +50,6 @@ class MovieLocalHelper extends SQLiteOpenHelper {
             MovieContract.MovieEntry.COLUMN_METASCORE, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_IMDB_RATING, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_IMDB_VOTES, TEXT_TYPE,
-            MovieContract.MovieEntry.COLUMN_IMDB_ID, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_TYPE, TEXT_TYPE,
             MovieContract.MovieEntry.COLUMN_TOTAL_SEASONS, TEXT_TYPE
         );
