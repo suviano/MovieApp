@@ -21,7 +21,7 @@ import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.movie.MovieActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static marcos.movieapp.home.MoviesFragment.SEARCH_MOVIE_RESULT;
+import static marcos.movieapp.home.HomeFragment.SEARCH_MOVIE_RESULT;
 
 public class SearchMovieFragment extends Fragment
     implements ContractSearchMovie.View, SearchResultClickListener {
@@ -63,7 +63,6 @@ public class SearchMovieFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Override

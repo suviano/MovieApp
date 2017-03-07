@@ -46,7 +46,7 @@ class SearchMovieListAdapter extends
     @Override
     public MovieOverviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-            .inflate(R.layout.movie_overview_item, parent, false);
+            .inflate(R.layout.item_movie_overview, parent, false);
         MovieOverviewHolder movieOverviewHolder = new MovieOverviewHolder(view);
         view.setTag(movieOverviewHolder);
         view.setOnClickListener(this);

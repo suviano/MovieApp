@@ -3,16 +3,20 @@ package marcos.movieapp.home;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.List;
+
+import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.data.source.MovieRepository;
 import marcos.movieapp.utils.schedulers.BaseSchedulerProvider;
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-class MoviesPresenter implements Contract.Presenter {
+class HomePresenter implements Contract.Presenter {
 
     static final String TAG = "Movies";
 
@@ -27,8 +31,8 @@ class MoviesPresenter implements Contract.Presenter {
     @NonNull
     private CompositeSubscription subscription;
 
-    MoviesPresenter(@NonNull MovieRepository movieRepository, @NonNull Contract.View view,
-                    @NonNull BaseSchedulerProvider schedulerProvider) {
+    HomePresenter(@NonNull MovieRepository movieRepository, @NonNull Contract.View view,
+                  @NonNull BaseSchedulerProvider schedulerProvider) {
         this.movieRepository = checkNotNull(movieRepository, "MovieOverview repo is null");
         this.view = checkNotNull(view, "View is null");
         this.schedulerProvider = checkNotNull(schedulerProvider, "Scheduler is null");
@@ -39,7 +43,12 @@ class MoviesPresenter implements Contract.Presenter {
 
     @Override
     public void subscribe() {
-        subscription.clear();
+        this.subscription.clear();
+        Subscription subscription = movieRepository.getFavoriteMovies()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe(this::displayFav);
+        this.subscription.add(subscription);
     }
 
     @Override
@@ -52,23 +61,27 @@ class MoviesPresenter implements Contract.Presenter {
             .subscribeOn(schedulerProvider.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<ResMovies>() {
-                private ResMovies resMovies;
 
                 @Override
                 public void onCompleted() {
-                    view.displaySearchResult(resMovies);
                 }
 
                 @Override
                 public void onError(Throwable e) {
-                    Log.wtf(TAG, e);
+                    Log.wtf(TAG, "Check connection | Error: " + e.getCause());
                 }
 
                 @Override
                 public void onNext(ResMovies resMovies) {
-                    this.resMovies = resMovies;
+                    view.displaySearchResult(resMovies);
                 }
             }));
+    }
+
+    private void displayFav(List<ResMovie> resMovies) {
+        if (!resMovies.isEmpty()) {
+            view.displayFavorites(resMovies);
+        }
     }
 
 }

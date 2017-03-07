@@ -14,8 +14,9 @@ import marcos.movieapp.R;
 import marcos.movieapp.utils.FragmentUtils;
 
 
-public class MoviesActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     SearchView searchView;
+    HomePresenter homePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +26,23 @@ public class MoviesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        MoviesFragment moviesFragment = (MoviesFragment)
-            getSupportFragmentManager().findFragmentById(R.id.frame_container);
-        if (moviesFragment == null) {
-            moviesFragment = MoviesFragment.newInstance();
+        HomeFragment homeFragment = (HomeFragment)
+            getSupportFragmentManager().findFragmentById(R.id.frame_container_home);
+        if (homeFragment == null) {
+            homeFragment = HomeFragment.newInstance();
             FragmentUtils.addFragmentToActivity(
-                getSupportFragmentManager(), moviesFragment, R.id.frame_container);
+                getSupportFragmentManager(), homeFragment, R.id.frame_container_home);
         }
 
-        MoviesPresenter moviesPresenter = new MoviesPresenter(Injection.provideMovieRepository(this),
-            moviesFragment, Injection.provideSchedulerProvider());
+        homePresenter = new HomePresenter(Injection.provideMovieRepository(this),
+            homeFragment, Injection.provideSchedulerProvider());
 
         searchView = (SearchView) findViewById(R.id.search_movie);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!Strings.isNullOrEmpty(query)) {
-                    moviesPresenter.searchMovie(query);
+                    homePresenter.searchMovie(query);
                 }
                 return true;
             }
@@ -51,5 +52,11 @@ public class MoviesActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        homePresenter.subscribe();
     }
 }

@@ -2,6 +2,7 @@ package marcos.movieapp.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,11 +10,14 @@ import android.support.annotation.Nullable;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 
+import java.util.List;
+
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.data.source.MovieDataSource;
 import marcos.movieapp.utils.schedulers.BaseSchedulerProvider;
 import rx.Observable;
+import rx.functions.Func1;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static marcos.movieapp.data.source.local.MovieContract.MovieEntry;
@@ -24,7 +28,10 @@ public class MovieLocalDataSource implements MovieDataSource {
     private static MovieLocalDataSource INSTANCE = null;
 
     @NonNull
-    private final BriteDatabase briteDatabase;
+    private final BriteDatabase databaseHelper;
+
+    @NonNull
+    private Func1<Cursor, ResMovie> resMovieMapperFunction;
 
     private MovieLocalDataSource(@NonNull Context context,
                                  @NonNull BaseSchedulerProvider schedulerProvider) {
@@ -32,11 +39,12 @@ public class MovieLocalDataSource implements MovieDataSource {
         checkNotNull(schedulerProvider, "schedulerProvider cannot be null");
         MovieLocalHelper movieLocalHelper = new MovieLocalHelper(context);
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
-        briteDatabase = sqlBrite.wrapDatabaseHelper(movieLocalHelper, schedulerProvider.io());
+        databaseHelper = sqlBrite.wrapDatabaseHelper(movieLocalHelper, schedulerProvider.io());
+        resMovieMapperFunction = this::resMovieCursor;
     }
 
-    public static MovieLocalDataSource getInstance(@NonNull Context context,
-                                                   @NonNull BaseSchedulerProvider schedulerProvider) {
+    public static MovieLocalDataSource getInstance(
+        @NonNull Context context, @NonNull BaseSchedulerProvider schedulerProvider) {
         if (INSTANCE == null) {
             INSTANCE = new MovieLocalDataSource(context, schedulerProvider);
         }
@@ -47,6 +55,13 @@ public class MovieLocalDataSource implements MovieDataSource {
         INSTANCE = null;
     }
 
+    @NonNull
+    private ResMovie resMovieCursor(@NonNull Cursor cursor) {
+        String title = cursor.getString(cursor.getColumnIndexOrThrow(MovieEntry.COLUMN_TITLE));
+        String year = cursor.getString(cursor.getColumnIndexOrThrow(MovieEntry.COLUMN_YEAR));
+        return new ResMovie(title, year);
+    }
+
     @Override
     public Observable<ResMovies> getMovies(@NonNull String name) {
         return null;
@@ -55,6 +70,14 @@ public class MovieLocalDataSource implements MovieDataSource {
     @Override
     public Observable<ResMovie> getMovieByTitleId(@NonNull String titleId) {
         return null;
+    }
+
+    @Override
+    public Observable<List<ResMovie>> getFavoriteMovies() {
+        String query = String.format("SELECT %s, %s FROM %s",
+            MovieEntry.COLUMN_TITLE, MovieEntry.COLUMN_YEAR, MovieEntry.TABLE_NAME);
+        return databaseHelper.createQuery(MovieEntry.TABLE_NAME, query)
+            .mapToList(resMovieMapperFunction);
     }
 
     @Override
@@ -81,13 +104,13 @@ public class MovieLocalDataSource implements MovieDataSource {
         contentValues.put(MovieEntry.COLUMN_IMDB_ID, resMovie.getImdbID());
         contentValues.put(MovieEntry.COLUMN_TYPE, resMovie.getType());
         contentValues.put(MovieEntry.COLUMN_TOTAL_SEASONS, resMovie.getTotalSeasons());
-        briteDatabase.insert(MovieEntry.TABLE_NAME,
+        databaseHelper.insert(MovieEntry.TABLE_NAME,
             contentValues, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     @Override
     public boolean deleteMovie(@NonNull String movieId) {
         String selection = MovieEntry.COLUMN_IMDB_ID + " LIKE ?";
-        return 1 == briteDatabase.delete(MovieEntry.TABLE_NAME, selection, movieId);
+        return 1 == databaseHelper.delete(MovieEntry.TABLE_NAME, selection, movieId);
     }
 }

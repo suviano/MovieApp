@@ -68,6 +68,11 @@ public class ResMovie {
     @Expose
     private String response;
 
+    public ResMovie(String title, String tyar) {
+        this.title = title;
+        this.tyar = tyar;
+    }
+
     public String getTitle() {
         return title;
     }

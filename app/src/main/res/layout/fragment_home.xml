@@ -2,11 +2,12 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_overview_recycler_view"
-    android:name="marcos.movieapp.SearchMovieFragment"
+    android:id="@+id/home_movies_recycler_view"
+    android:name="marcos.movieapp.home.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:scrollbars="vertical"
     app:layoutManager="LinearLayoutManager"
-    tools:context="marcos.movieapp.searchMovie.SearchMovieFragment"
-    tools:listitem="@layout/item_movie_overview" />
+    tools:context="marcos.movieapp.home.HomeFragment"
+    tools:listitem="@layout/item_home_movie" />

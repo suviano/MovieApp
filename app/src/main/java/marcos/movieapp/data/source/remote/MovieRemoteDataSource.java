@@ -3,6 +3,8 @@ package marcos.movieapp.data.source.remote;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.List;
+
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.data.source.MovieDataSource;
@@ -40,6 +42,11 @@ public class MovieRemoteDataSource implements MovieDataSource {
     public Observable<ResMovie> getMovieByTitleId(@NonNull String titleId) {
         Observable<ResMovie> resMovieObservable = omdbApiService.searchMovieByIdOrTitle(titleId);
         return resMovieObservable.single(resMovie -> true);
+    }
+
+    @Override
+    public Observable<List<ResMovie>> getFavoriteMovies() {
+        return null;
     }
 
     @Override

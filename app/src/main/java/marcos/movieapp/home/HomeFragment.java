@@ -5,30 +5,51 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import marcos.movieapp.R;
 import marcos.movieapp.data.entities.MovieOverview;
+import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.searchMovie.SearchMovieActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class MoviesFragment extends Fragment implements Contract.View {
+public class HomeFragment extends Fragment implements Contract.View {
 
     public static final String SEARCH_MOVIE_RESULT = "SEARCH_MOVIE_RESULT";
 
     private Contract.Presenter presenter;
+    private RecyclerView recyclerView;
+    private HomeListAdapter adapter;
 
-    public MoviesFragment() {
+    public HomeFragment() {
     }
 
-    public static MoviesFragment newInstance() {
-        return new MoviesFragment();
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.home_movies_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new HomeListAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     @Override
@@ -39,20 +60,12 @@ public class MoviesFragment extends Fragment implements Contract.View {
     @Override
     public void onResume() {
         super.onResume();
-        this.presenter.unSubscribe();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         this.presenter.unSubscribe();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return null;
     }
 
     @Override
@@ -71,8 +84,13 @@ public class MoviesFragment extends Fragment implements Contract.View {
                     Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
-                Log.wtf(MoviesPresenter.TAG, resMovies.getError());
+                Log.wtf(HomePresenter.TAG, resMovies.getError());
             }
         }
+    }
+
+    @Override
+    public void displayFavorites(List<ResMovie> resMovies) {
+        adapter.updateHomeResMovies(resMovies);
     }
 }

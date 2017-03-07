@@ -13,4 +13,5 @@
     <string name="movie_director_container_title_txt">Director :</string>
     <string name="movie_writers_container_title_txt">Writers :</string>
     <string name="movie_actors_container_title_txt">Actors :</string>
+    <string name="nothing_saved">Nothing saved</string>
 </resources>
