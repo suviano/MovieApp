@@ -24,7 +24,7 @@ public class SearchMovieActivity extends AppCompatActivity {
         if (moviesFragment == null) {
             moviesFragment = SearchMovieFragment.newInstance();
             FragmentUtils.addFragmentToActivity(
-                getSupportFragmentManager(), moviesFragment, R.id.frame_container);
+                getSupportFragmentManager(), moviesFragment, R.id.frame_container, false);
         }
 
         searchMoviePresenter = new SearchMoviePresenter(Injection.provideMovieRepository(this),

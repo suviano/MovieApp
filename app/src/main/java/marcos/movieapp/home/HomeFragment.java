@@ -83,8 +83,6 @@ public class HomeFragment extends Fragment implements Contract.View, HomeSavedCl
                 Intent intent = new Intent(getActivity(), SearchMovieActivity.class);
                 intent.putParcelableArrayListExtra(SEARCH_MOVIE_RESULT,
                     (ArrayList<MovieOverview>) resMovies.getMovies());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
                 Log.wtf(TAG, resMovies.getError());

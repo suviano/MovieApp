@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         if (homeFragment == null) {
             homeFragment = HomeFragment.newInstance();
             FragmentUtils.addFragmentToActivity(
-                getSupportFragmentManager(), homeFragment, R.id.frame_container_home);
+                getSupportFragmentManager(), homeFragment, R.id.frame_container_home, false);
         }
 
         homePresenter = new HomePresenter(Injection.provideMovieRepository(this),
