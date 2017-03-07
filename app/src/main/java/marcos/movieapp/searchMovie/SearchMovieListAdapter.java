@@ -71,8 +71,8 @@ class SearchMovieListAdapter extends
     @Override
     public void onClick(View v) {
         MovieOverviewHolder movieOverviewHolder = (MovieOverviewHolder) v.getTag();
-        searchResultClickListener.seeDetails(
-            v, movieOverviews.get(movieOverviewHolder.getAdapterPosition()));
+        String title = movieOverviews.get(movieOverviewHolder.getAdapterPosition()).getTitle();
+        searchResultClickListener.seeDetails(title);
     }
 
     static class MovieOverviewHolder extends RecyclerView.ViewHolder {

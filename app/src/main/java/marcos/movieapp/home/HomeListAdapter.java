@@ -15,13 +15,18 @@ import marcos.movieapp.data.entities.ResMovie;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeViewHolder> {
+class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>
+    implements View.OnClickListener {
     @NonNull
     private Context context;
+    @NonNull
+    private HomeSavedClickListener homeSavedClickListener;
     private List<ResMovie> resMovies;
 
-    HomeListAdapter(@NonNull Context context) {
+
+    HomeListAdapter(@NonNull Context context, @NonNull HomeSavedClickListener homeSavedClickListener) {
         this.context = checkNotNull(context);
+        this.homeSavedClickListener = checkNotNull(homeSavedClickListener);
     }
 
     @Override
@@ -30,6 +35,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeViewHolde
             .inflate(R.layout.item_home_movie, parent, false);
         HomeViewHolder holder = new HomeViewHolder(view);
         view.setTag(holder);
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -48,6 +54,12 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeViewHolde
     void updateHomeResMovies(List<ResMovie> resMovies) {
         this.resMovies = resMovies;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        HomeViewHolder holder = (HomeViewHolder) v.getTag();
+        homeSavedClickListener.seeDetails(v, resMovies.get(holder.getAdapterPosition()).getTitle());
     }
 
     static class HomeViewHolder extends RecyclerView.ViewHolder {

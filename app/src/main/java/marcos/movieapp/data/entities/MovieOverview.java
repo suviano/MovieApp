@@ -23,6 +23,10 @@ public class MovieOverview implements Parcelable {
     @Expose
     private String poster;
 
+    public MovieOverview(String title) {
+        this.title = title;
+    }
+
     protected MovieOverview(Parcel in) {
         title = in.readString();
         year = in.readString();

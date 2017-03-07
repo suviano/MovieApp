@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import marcos.movieapp.BasePresenter;
 import marcos.movieapp.BaseView;
-import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 
 interface ContractMovie {
@@ -17,7 +16,7 @@ interface ContractMovie {
     interface View extends BaseView<Presenter> {
         void displaySearchResult(ResMovie resMovie);
 
-        MovieOverview getMovieFromIntent();
+        String getMovieFromIntent();
 
         void configureMovieTitle(@NonNull String title);
 

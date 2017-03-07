@@ -22,15 +22,13 @@ import marcos.movieapp.movie.MovieActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static marcos.movieapp.home.HomeFragment.SEARCH_MOVIE_RESULT;
+import static marcos.movieapp.movie.MovieActivity.MOVIE_TITLE;
 
 public class SearchMovieFragment extends Fragment
     implements ContractSearchMovie.View, SearchResultClickListener {
 
-    public final static String MOVIE_OVERVIEW_BUNDLE = "MOVIE_OVERVIEW_BUNDLE";
-
     private ContractSearchMovie.Presenter presenter;
     private SearchMovieListAdapter adapter;
-    private RecyclerView recyclerView;
     private List<MovieOverview> movieOverviews;
 
     public SearchMovieFragment() {
@@ -49,7 +47,8 @@ public class SearchMovieFragment extends Fragment
 
         View root = inflater.inflate(R.layout.fragment_search_movie, container, false);
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.movie_overview_recycler_view);
+        RecyclerView recyclerView =
+            (RecyclerView) root.findViewById(R.id.movie_overview_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -93,9 +92,9 @@ public class SearchMovieFragment extends Fragment
     }
 
     @Override
-    public void seeDetails(View view, MovieOverview movieOverview) {
+    public void seeDetails(String movieTitle) {
         Intent intent = new Intent(getActivity(), MovieActivity.class);
-        intent.putExtra(MOVIE_OVERVIEW_BUNDLE, movieOverview);
+        intent.putExtra(MOVIE_TITLE, movieTitle);
         startActivity(intent);
     }
 }

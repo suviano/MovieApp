@@ -21,9 +21,10 @@ import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static marcos.movieapp.searchMovie.SearchMovieFragment.MOVIE_OVERVIEW_BUNDLE;
 
 public class MovieActivity extends AppCompatActivity implements ContractMovie.View {
+
+    public final static String MOVIE_TITLE = "MOVIE_TITLE";
 
     private ContractMovie.Presenter presenter;
     private CoordinatorLayout movieCoordinator;
@@ -112,8 +113,8 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
     }
 
     @Override
-    public MovieOverview getMovieFromIntent() {
-        return getIntent().getParcelableExtra(MOVIE_OVERVIEW_BUNDLE);
+    public String getMovieFromIntent() {
+        return getIntent().getStringExtra(MOVIE_TITLE);
     }
 
     @Override

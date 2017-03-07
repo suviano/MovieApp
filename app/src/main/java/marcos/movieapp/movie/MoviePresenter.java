@@ -3,7 +3,6 @@ package marcos.movieapp.movie;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.source.MovieRepository;
 import marcos.movieapp.utils.schedulers.BaseSchedulerProvider;
@@ -24,23 +23,23 @@ class MoviePresenter implements ContractMovie.Presenter {
     @NonNull
     private ContractMovie.View view;
     @NonNull
-    private MovieOverview movieOverview;
+    private String movieTitle;
 
     MoviePresenter(@NonNull MovieRepository repository,
                    @NonNull ContractMovie.View view,
                    @NonNull BaseSchedulerProvider schedulerProvider,
-                   @NonNull MovieOverview movieOverview) {
+                   @NonNull String movieTitle) {
         this.repository = checkNotNull(repository, "MovieOverview repo is null");
         this.view = checkNotNull(view, "View is null");
         this.schedulerProvider = checkNotNull(schedulerProvider, "Scheduler is null");
-        this.movieOverview = checkNotNull(movieOverview, "MovieOverview is null");
+        this.movieTitle = checkNotNull(movieTitle, "MovieOverview is null");
 
         this.view.setPresenter(this);
     }
 
     @Override
     public void subscribe() {
-        subscription = repository.getMovieByTitleId(movieOverview.getTitle())
+        subscription = repository.getMovieByTitleId(movieTitle)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .subscribe(new Observer<ResMovie>() {

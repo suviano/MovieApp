@@ -19,16 +19,18 @@ import marcos.movieapp.R;
 import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
+import marcos.movieapp.movie.MovieActivity;
 import marcos.movieapp.searchMovie.SearchMovieActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static marcos.movieapp.home.HomePresenter.TAG;
+import static marcos.movieapp.movie.MovieActivity.MOVIE_TITLE;
 
-public class HomeFragment extends Fragment implements Contract.View {
+public class HomeFragment extends Fragment implements Contract.View, HomeSavedClickListener {
 
     public static final String SEARCH_MOVIE_RESULT = "SEARCH_MOVIE_RESULT";
 
     private Contract.Presenter presenter;
-    private RecyclerView recyclerView;
     private HomeListAdapter adapter;
 
     public HomeFragment() {
@@ -44,10 +46,10 @@ public class HomeFragment extends Fragment implements Contract.View {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.home_movies_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.home_movies_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new HomeListAdapter(getContext());
+        adapter = new HomeListAdapter(getContext(), this);
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -60,6 +62,7 @@ public class HomeFragment extends Fragment implements Contract.View {
     @Override
     public void onResume() {
         super.onResume();
+        presenter.subscribe();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class HomeFragment extends Fragment implements Contract.View {
                     Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
-                Log.wtf(HomePresenter.TAG, resMovies.getError());
+                Log.wtf(TAG, resMovies.getError());
             }
         }
     }
@@ -92,5 +95,12 @@ public class HomeFragment extends Fragment implements Contract.View {
     @Override
     public void displayFavorites(List<ResMovie> resMovies) {
         adapter.updateHomeResMovies(resMovies);
+    }
+
+    @Override
+    public void seeDetails(@NonNull View view, @NonNull String movieTitle) {
+        Intent intent = new Intent(getActivity(), MovieActivity.class);
+        intent.putExtra(MOVIE_TITLE, movieTitle);
+        startActivity(intent);
     }
 }
