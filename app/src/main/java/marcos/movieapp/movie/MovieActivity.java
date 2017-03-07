@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,7 +18,6 @@ import com.squareup.picasso.Picasso;
 
 import marcos.movieapp.Injection;
 import marcos.movieapp.R;
-import marcos.movieapp.data.entities.MovieOverview;
 import marcos.movieapp.data.entities.ResMovie;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -107,6 +107,9 @@ public class MovieActivity extends AppCompatActivity implements ContractMovie.Vi
                 return true;
             case R.id.delete_movie_menu_item:
                 presenter.deleteMovie(resMovie.getImdbID());
+                return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
