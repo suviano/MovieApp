@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
+import marcos.movieapp.BuildConfig;
 import marcos.movieapp.data.entities.ResMovie;
 import marcos.movieapp.data.entities.ResMovies;
 import marcos.movieapp.data.source.MovieDataSource;
@@ -34,13 +35,13 @@ public class MovieRemoteDataSource implements MovieDataSource {
 
     @Override
     public Observable<ResMovies> getMovies(@NonNull String name) {
-        Observable<ResMovies> resMoviesObservable = omdbApiService.searchMovie(name);
+        Observable<ResMovies> resMoviesObservable = omdbApiService.searchMovie(name, BuildConfig.OMDB_API_KEY);
         return resMoviesObservable.single(resMovies -> true);
     }
 
     @Override
     public Observable<ResMovie> getMovieByTitleId(@NonNull String titleId) {
-        Observable<ResMovie> resMovieObservable = omdbApiService.searchMovieByIdOrTitle(titleId);
+        Observable<ResMovie> resMovieObservable = omdbApiService.searchMovieByIdOrTitle(titleId, BuildConfig.OMDB_API_KEY);
         return resMovieObservable.single(resMovie -> true);
     }
 

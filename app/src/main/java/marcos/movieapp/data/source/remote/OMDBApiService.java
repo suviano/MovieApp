@@ -10,8 +10,8 @@ import rx.Observable;
 interface OMDBApiService {
 
     @GET("/")
-    Observable<ResMovies> searchMovie(@Query("s") String title);
+    Observable<ResMovies> searchMovie(@Query("s") String title, @Query("apikey") String key);
 
     @GET("/")
-    Observable<ResMovie> searchMovieByIdOrTitle(@Query("t") String query);
+    Observable<ResMovie> searchMovieByIdOrTitle(@Query("t") String query, @Query("apikey") String key);
 }
