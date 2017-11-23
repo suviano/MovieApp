@@ -8,5 +8,9 @@ and save offline.
 
 create a file named 'keystore.properties'
 
-the content should be `OMDbApiKey="MY_OMDB_KEY"`
+the content should be
+``` .properties
+OMDbApiKey="MY_OMDB_KEY"
+ApiHost="http://<<HOST>>"
+```
 

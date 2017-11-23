@@ -52,6 +52,7 @@ android {
     }
     buildTypes.each {
         it.buildConfigField 'String', 'OMDB_API_KEY', keystoreProperties['OMDbApiKey']
+        it.buildConfigField 'String', 'API_HOST', keystoreProperties['ApiHost']
     }
 }
 
