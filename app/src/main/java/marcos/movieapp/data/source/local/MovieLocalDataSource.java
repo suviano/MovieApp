@@ -35,8 +35,8 @@ public class MovieLocalDataSource implements MovieDataSource {
 
     private MovieLocalDataSource(@NonNull Context context,
                                  @NonNull BaseSchedulerProvider schedulerProvider) {
-        checkNotNull(context, "context cannot be null");
-        checkNotNull(schedulerProvider, "schedulerProvider cannot be null");
+        context = checkNotNull(context, "context cannot be null");
+        schedulerProvider = checkNotNull(schedulerProvider, "schedulerProvider cannot be null");
         MovieLocalHelper movieLocalHelper = new MovieLocalHelper(context);
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
         databaseHelper = sqlBrite.wrapDatabaseHelper(movieLocalHelper, schedulerProvider.io());
@@ -82,7 +82,7 @@ public class MovieLocalDataSource implements MovieDataSource {
 
     @Override
     public void saveMovie(@NonNull ResMovie resMovie) {
-        checkNotNull(resMovie);
+        resMovie = checkNotNull(resMovie);
         ContentValues contentValues = new ContentValues();
         contentValues.put(MovieEntry.COLUMN_TITLE, resMovie.getTitle());
         contentValues.put(MovieEntry.COLUMN_YEAR, resMovie.getTyar());

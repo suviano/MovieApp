@@ -29,9 +29,9 @@ public class MovieRemoteDataSource implements MovieDataSource {
         return INSTANCE;
     }
 
-    public static void destroyInstance() {
+    /* public static void destroyInstance() {
         INSTANCE = null;
-    }
+    } */
 
     @Override
     public Observable<ResMovies> getMovies(@NonNull String name) {

@@ -23,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         HomeFragment homeFragment = (HomeFragment)
@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         homePresenter = new HomePresenter(Injection.provideMovieRepository(this),
             homeFragment, Injection.provideSchedulerProvider());
 
-        searchView = (SearchView) findViewById(R.id.search_movie);
+        searchView = findViewById(R.id.search_movie);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

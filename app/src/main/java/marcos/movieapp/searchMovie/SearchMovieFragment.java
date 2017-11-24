@@ -40,7 +40,7 @@ public class SearchMovieFragment extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         movieOverviews = getMovieFromIntent();
@@ -48,7 +48,7 @@ public class SearchMovieFragment extends Fragment
         View root = inflater.inflate(R.layout.fragment_search_movie, container, false);
 
         RecyclerView recyclerView =
-            (RecyclerView) root.findViewById(R.id.movie_overview_recycler_view);
+            root.findViewById(R.id.movie_overview_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

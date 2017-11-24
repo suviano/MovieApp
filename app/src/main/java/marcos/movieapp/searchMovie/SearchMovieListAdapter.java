@@ -82,9 +82,9 @@ class SearchMovieListAdapter extends
 
         MovieOverviewHolder(View itemView) {
             super(itemView);
-            movieTitle = (TextView) itemView.findViewById(R.id.txt_movie_title);
-            movieYear = (TextView) itemView.findViewById(R.id.txt_movie_year);
-            moviePoster = (ImageView) itemView.findViewById(R.id.movie_poster);
+            movieTitle = itemView.findViewById(R.id.txt_movie_title);
+            movieYear = itemView.findViewById(R.id.txt_movie_year);
+            moviePoster = itemView.findViewById(R.id.movie_poster);
         }
     }
 

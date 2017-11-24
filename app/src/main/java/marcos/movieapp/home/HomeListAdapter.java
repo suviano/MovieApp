@@ -67,7 +67,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeViewHolde
 
         HomeViewHolder(View itemView) {
             super(itemView);
-            titleTxt = (TextView) itemView.findViewById(R.id.movie_title_year_txt);
+            titleTxt = itemView.findViewById(R.id.movie_title_year_txt);
         }
 
         TextView getTitleTxt() {

@@ -10,8 +10,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FragmentUtils {
     public static void addFragmentToActivity(
         @NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId, boolean addToBackStack) {
-        checkNotNull(fragmentManager);
-        checkNotNull(fragment);
+        fragmentManager = checkNotNull(fragmentManager);
+        fragment = checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(frameId, fragment);
         if (addToBackStack) {

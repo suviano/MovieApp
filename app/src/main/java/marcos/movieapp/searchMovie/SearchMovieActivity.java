@@ -30,7 +30,7 @@ public class SearchMovieActivity extends AppCompatActivity {
         searchMoviePresenter = new SearchMoviePresenter(Injection.provideMovieRepository(this),
             moviesFragment, Injection.provideSchedulerProvider());
 
-        searchView = (SearchView) findViewById(R.id.search_movie);
+        searchView = findViewById(R.id.search_movie);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
